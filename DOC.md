@@ -86,3 +86,13 @@ sequenceDiagram
 - Le code est conçu pour fonctionner sur Arduino MKR WAN 1300/1310.
 - La configuration initiale LoRaWAN peut être lancée via le bouton FIRSTCONFIG.
 - Les identifiants LoRaWAN sont à renseigner dans `arduino_secrets.h`.
+
+## Publication des données et configuration du serveur
+
+Le code Arduino n’intègre pas directement la configuration du serveur de réception LoRaWAN (adresse IP, URL, etc.). L’envoi des données se fait via le protocole LoRaWAN :
+
+- Les identifiants LoRaWAN (`AppEUI`, `AppKey`, `DevEUI`) sont définis dans le fichier `arduino_secrets.h`.
+- L’Arduino transmet les données à une passerelle LoRaWAN (gateway), qui relaie ensuite vers un réseau LoRaWAN (ex : The Things Network, ChirpStack).
+- Le serveur de destination (Network Server, Application Server) est configuré sur la plateforme LoRaWAN, pas dans le code Arduino.
+
+**Pour changer le serveur de réception, il faut modifier la configuration sur la plateforme LoRaWAN (et non dans le code Arduino).**
